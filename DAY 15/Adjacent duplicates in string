@@ -1,0 +1,23 @@
+DAY 15 - LC 1209
+
+class Solution {
+        public String removeDuplicates(String s, int k) {
+            StringBuilder sb = new StringBuilder();
+            Stack<Integer> counts = new Stack<>();
+
+            for (char c : s.toCharArray()) {
+                sb.append(c);
+
+                if (sb.length() >= 2 && sb.charAt(sb.length() - 1) == sb.charAt(sb.length() - 2)) {
+                    counts.push(counts.isEmpty() ? 2 : counts.pop() + 1);                                                                                                                                                                                      
+                    } else {
+                    counts.push(1);
+                }
+                if(counts.peek()==k){
+                    sb.delete(sb.length()-k,sb.length());
+                    counts.pop();
+                }
+            }
+            return sb.toString();
+        }
+}                      
