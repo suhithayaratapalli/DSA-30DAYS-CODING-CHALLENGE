@@ -1,0 +1,30 @@
+DAY 18- LC 295
+
+class MedianFinder {
+
+    public MedianFinder() { }
+        PriorityQueue<Integer> min=new PriorityQueue<>();
+        PriorityQueue<Integer> max=new PriorityQueue<>(Comparator.reverseOrder());
+    
+    public void addNum(int num) {
+        if(max.isEmpty() ||num<=max.peek())
+        max.offer(num);
+        else
+         min.offer(num);
+        if(max.size()<min.size())
+        max.offer(min.poll());
+        else if(max.size()>min.size()+1)
+        min.offer(max.poll());
+        
+    }
+    
+    public double findMedian() {
+        if(min.size()==max.size()){
+            return (min.peek()+max.peek())/2.0;
+        }
+        return max.peek();
+        
+    }
+}
+
+
