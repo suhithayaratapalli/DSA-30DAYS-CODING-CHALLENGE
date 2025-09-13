@@ -1,0 +1,19 @@
+DAY25- LC 700
+
+class Solution {
+    public TreeNode searchBST(TreeNode root, int val) {
+        if(root==null) return null;
+        TreeNode temp=root;
+        while(temp!=null){
+        if(val<temp.val){
+                temp=temp.left;
+            }else if(val>temp.val){
+                temp=temp.right;
+            }else{
+                return temp;
+            }
+        }
+        return temp;
+        
+    }
+}
