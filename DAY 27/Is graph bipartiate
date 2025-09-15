@@ -1,0 +1,45 @@
+DAY 27 - LC785
+
+class Solution {
+
+    public static boolean bipartitieHelper(int[][] graph,int start,int vis[],int col[]){
+
+        Queue<Integer> queue = new LinkedList<>();
+        queue.offer(start);
+        vis[start] = 1;
+        col[start] = 0;
+
+        while(!queue.isEmpty()) { 
+             int node = queue.poll();
+
+            for(int val : graph[node]){
+
+                if(vis[val] == 0){
+                    queue.offer(val);
+                    vis[val] = 1;
+                    col[val] = 1 - col[node];
+                }
+                else if(col[node] == col[val]) return false;
+            }
+        }
+
+        return true;
+    }
+
+    public boolean isBipartite(int[][] graph)
+    {
+        int n = graph.length;
+
+        int vis[] = new int[n];
+        int col[] = new int[n];
+        for(int i=0;i<n;i++){
+            vis[i] = 0;
+            col[i] = -1;
+        }
+
+        for(int i = 0;i<n;i++){
+            if(vis[i] == 0)if(!bipartitieHelper(graph,i,vis,col))return false;
+        }
+        return true;
+    }
+}
